@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <form action="/users/logout" method="POST">
+        <button type="submit">Logout</button>
+    </form>
+    <h2>Students</h2>
+    <a href="/students/new">Add New Student</a>
+    <ul>
+        <% students.forEach(student => { %>
+            <li>
+                <%= student.name %> - <%= student.email %>
+                <a href="/students/<%= student._id %>">Edit</a>
+                <form action="/students/<%= student._id %>?_method=DELETE" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+                <a href="/students/<%= student._id %>/records">View Records</a>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>
