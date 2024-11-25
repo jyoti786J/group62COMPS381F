@@ -1,0 +1,28 @@
+const express = require('express');
+const User = require('../models/user');
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const router = express.Router();
+
+// Register a new user
+router.post('/register', async (req, res) => {
+    const { email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({ email, password: hashedPassword });
+    await user.save();
+    res.redirect('/users/login');
+});
+
+// Login user
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/dashboard',
+    failureRedirect: '/users/login',
+}));
+
+// Logout user
+router.post('/logout', (req, res) => {
+    req.session = null;
+    res.redirect('/users/login');
+});
+
+module.exports = router;
