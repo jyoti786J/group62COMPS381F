@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Academic Records</title>
+</head>
+<body>
+    <h2>Academic Records for Student</h2>
+    <form action="/students/<%= studentId %>/records" method="POST">
+        <div>
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" required>
+        </div>
+        <div>
+            <label for="grade">Grade:</label>
+            <input type="text" id="grade" name="grade" required>
+        </div>
+        <div>
+            <label for="semester">Semester:</label>
+            <input type="text" id="semester" name="semester" required>
+        </div>
+        <button type="submit">Add Record</button>
+    </form>
+    <h3>Existing Records:</h3>
+    <ul>
+        <% records.forEach(record => { %>
+            <li>
+                <%= record.subject %>: <%= record.grade %> (Semester: <%= record.semester %>)
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>
