@@ -1,2 +1,2 @@
 # group62COMPS381F
-#Group62 Academic Record
+Group62 Student Academic Record System
